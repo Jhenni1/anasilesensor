@@ -1,14 +1,13 @@
 from flask import Flask, request, send_file
-from model.model import configure as db_config
-from serializer.serializer import  configure as ma_config
+from project.model.model import configure as db_config
+from project.serializer.serializer import  configure as ma_config
 from flask_migrate import Migrate
-from serializer.serializer import DadosMotorSchema
+from project.serializer.serializer import DadosMotorSchema
 from datetime import date, datetime
-from model.model import DadosMotor
+from project.model.model import DadosMotor
 
 import os
 import csv
-import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -45,7 +44,7 @@ def baixar_dado ():
    result = dms.dumps(dados)
    result = eval(result)
    cols = ['data', 'hora', 'sensor1', 'id']
-   with open("output.csv", 'w') as f:
+   with open("../output.csv", 'w') as f:
       wr = csv.DictWriter(f, fieldnames=cols)
       wr.writeheader()
       wr.writerows(result)
