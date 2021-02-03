@@ -2,10 +2,12 @@ alembic==1.4.3
 click==7.1.2
 cmake==3.18.2.post1
 Flask==1.1.2
+Flask-Cors==3.0.10
 Flask-JWT-Extended==3.24.1
 flask-marshmallow==0.11.0
 Flask-Migrate==2.5.3
 Flask-SQLAlchemy==2.4.4
+gunicorn==20.0.4
 imutils==0.5.3
 itsdangerous==1.1.0
 Jinja2==2.11.2

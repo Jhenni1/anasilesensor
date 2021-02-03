@@ -8,7 +8,8 @@ from project.model.model import DadosMotor
 
 import os
 import csv
-##kd os from??w
+from flask_cors import CORS
+from project.model.model import create_tables
 
 app = Flask(__name__) ## nome
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False ## suas funcionalidades
@@ -17,6 +18,7 @@ app.config['SECRET_KEY'] = 'e7c0596d00d6d1d17e64d6547cd732cf' ## ?
 db_config(app) ## inserindo exteões
 ma_config(app) ## ? bd
 Migrate(app,app.db) ## ?
+app.cli.add_command(create_tables)
 
 #primeira rota
 @app.route('/')
@@ -43,24 +45,29 @@ def receber(): #o tipo da função
 #terceira rota de baixar os dados em formato de excel
 @app.route("/baixar_dado")
 def baixar_dado ():
-   dms = DadosMotorSchema(many=True)
-   dados = DadosMotor.query.all()
-   result = dms.dumps(dados)
-   result = eval(result)
-   cols = ['data', 'hora', 'sensor1', 'id']
-   with open("../output.csv", 'w') as f:
-      wr = csv.DictWriter(f, fieldnames=cols)
-      wr.writeheader()
-      wr.writerows(result)
+   dms = DadosMotorSchema(many=True)#requistar todos os dados de uma tabela especifica
+   dados = DadosMotor.query.all()#retorne os todos os dados
+   result = dms.dumps(dados) # dumps= transforma o dado de bd pra json ou python e retorna em formato de texto
+   result = eval(result) # transdormar (eval) de string pra json valendo
+   cols = ['data', 'hora', 'sensor1', 'id'] #titulo da coluna botando do mesmo jeito do bd
+   with open("output.csv", 'w') as f: #to abrindo um arquivo csv
+      wr = csv.DictWriter(f, fieldnames=cols) #organizador
+      wr.writeheader() #titulo
+      wr.writerows(result) #dados de cada coluna
    print(result)
-   path = os.getcwd()+"/output.csv"
-   return send_file(path, as_attachment=True)
-
-
+   path = os.getcwd()+"/output.csv" #caminho do codigo atual
+   return send_file(path, as_attachment=True) #send_file do flask pegue o arquivo do direotiro pra poder baixar
 
 
 ##app.run(debug=True)
-app.run(host='0.0.0.0', debug=False) ## ainda ta criando meu servidor global?
+#app.run(host='0.0.0.0', debug=False) ## to dizendo que to usando o ip do wifi
 
+cors = CORS(app, resource={r"/*": {"origins": "*"}})
 
+def main():
+    app.db.create_all()
+    app.run(host="0.0.0.0", port=5000)
+
+if __name__ == "__main__":
+    main()
 

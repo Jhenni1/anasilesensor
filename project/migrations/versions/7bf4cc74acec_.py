@@ -7,7 +7,7 @@ Create Date: 2021-02-01 21:12:15.727761
 """
 from alembic import op
 import sqlalchemy as sa
-
+#geração automatica
 
 # revision identifiers, used by Alembic.
 revision = '7bf4cc74acec'

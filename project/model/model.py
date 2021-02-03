@@ -1,10 +1,12 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy #lib do sql pra criar o bd
+import click
+from flask.cli import with_appcontext
 db = SQLAlchemy()
 def configure(app):
     db.init_app(app)
     app.db=db
 
-###esse n tá
+##esse n tá
 class DadosMotor(db.Model):  #aqui eu to criando a tabela do banco de dados ne?
     __name__ = "dadosmotor"
     id = db.Column(db.Integer, primary_key=True)
@@ -17,3 +19,8 @@ class DadosMotor(db.Model):  #aqui eu to criando a tabela do banco de dados ne?
         self.hora = hora
         self.sensor1 = sensor1
 
+
+@click.command(name='create_tables')
+@with_appcontext
+def create_tables():
+    db.create_all()
