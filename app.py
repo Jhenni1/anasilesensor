@@ -13,7 +13,7 @@ from project.model.model import create_tables
 
 app = Flask(__name__) ## nome
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False ## suas funcionalidades
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:xw1102@localhost:5432/postgres'  ## ?
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://xoehqsvxqhisvt:64fc782f4ab85557e9fa15427dcee485a6627fb7dbfcaaea16d5ec83aa3956e4@ec2-18-204-101-137.compute-1.amazonaws.com:5432/dcub541uu809c8'  ## ?
 app.config['SECRET_KEY'] = 'e7c0596d00d6d1d17e64d6547cd732cf' ## ?
 db_config(app) ## inserindo exteões
 ma_config(app) ## ? bd
