@@ -4,8 +4,8 @@ def configure(app):
     db.init_app(app)
     app.db=db
 
-
-class DadosMotor(db.Model):
+###esse n tá
+class DadosMotor(db.Model):  #aqui eu to criando a tabela do banco de dados ne?
     __name__ = "dadosmotor"
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(150))
