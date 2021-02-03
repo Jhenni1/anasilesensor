@@ -58,6 +58,14 @@ def baixar_dado ():
    path = os.getcwd()+"/output.csv" #caminho do codigo atual
    return send_file(path, as_attachment=True) #send_file do flask pegue o arquivo do direotiro pra poder baixar
 
+@app.route("/visualizar_dado")
+def visualizar_dado ():
+   dms= DadosMotorSchema(many=True)
+   result = DadosMotor.query.all()
+   return dms.jsonify(result)
+
+
+
 
 ##app.run(debug=True)
 #app.run(host='0.0.0.0', debug=False) ## to dizendo que to usando o ip do wifi
