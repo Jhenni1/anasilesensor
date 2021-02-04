@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template
 from project.model.model import configure as db_config
 from project.serializer.serializer import  configure as ma_config
 from flask_migrate import Migrate
@@ -23,7 +23,7 @@ app.cli.add_command(create_tables)
 #primeira rota
 @app.route('/')
 def home(): #def = função
-   return "Oi"
+   return render_template("home.html")
 
 #segunda rota
 @app.route('/dados',methods = ['POST']) #dizer o metodo da rota, nesse caso é post
