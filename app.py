@@ -33,7 +33,7 @@ def receber(): #o tipo da função
    data_atual = date.today() #date é a lib
    data_atual = "{}/{}/{}".format(data_atual.day, data_atual.month,data_atual.year) # formatando a data contatenar dados
    now = datetime.now() #agora pegar a hora
-   hour = str(now.hour) + ":" + str(now.minute) #concatenar o foamato da hora
+   hour = str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)#concatenar o foamato da hora
    dado["data"]= data_atual #adicionando o campo data no dado
    dado["hora"]= hour #mesma coisa
    dm=DadosMotorSchema() #chamando/instanciando os dados pra armazenar no banco de dados
@@ -66,6 +66,7 @@ def visualizar_dado ():
 
 
 #heroku config:add TZ="America/Belem"
+#heroku git:remote -a analisemotor
 
 ##app.run(debug=True)
 #app.run(host='0.0.0.0', debug=False) ## to dizendo que to usando o ip do wifi
