@@ -65,7 +65,7 @@ def visualizar_dado ():
    return dms.jsonify(result)
 
 
-
+#heroku config:add TZ="America/Belem"
 
 ##app.run(debug=True)
 #app.run(host='0.0.0.0', debug=False) ## to dizendo que to usando o ip do wifi
